@@ -13,8 +13,8 @@
 
 <ion-content>
   <ion-list no-lines reorder="true" (ionItemReorder)="booksService.reorder($event)" >
-    <ion-item-sliding (click)="toggleTimer(book)" *ngFor="let book of booksService.books">
-      <ion-item>
+    <ion-item-sliding *ngFor="let book of booksService.books">
+      <ion-item (click)="toggleTimer(book)">
         <ion-spinner *ngIf="book.active" name="bubbles" item-left></ion-spinner>
         <h6>{{book.name}}</h6>
         <h5>{{book.author}}</h5>
