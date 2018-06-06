@@ -84,6 +84,16 @@ export class ProjectsProvider {
     this.save();
   }
 
+  addProject(project): void {
+    this.projects.push(project);
+    this.save();
+  }
+
+  editProject(project, title): void{
+    project.setName(title);
+    this.save();
+  }
+
   removeProject(project): void {
     let index = this.projects.indexOf(project);
     if(index > -1){

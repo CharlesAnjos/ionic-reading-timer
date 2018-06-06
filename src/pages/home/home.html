@@ -1,14 +1,33 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary" transparent>
     <ion-title>
-      Ionic Blank
+      Timer
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="newProject()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+  <ion-list no-lines reorder="true" (ionItemReorder)="projectsService.reorder($event)" >
+    <ion-item-sliding (click)="toggleTimer(project)" *ngFor="let project of projectsService.projects">
+      <ion-item>
+        <ion-spinner *ngIf="project.active" name="bubbles" item-left></ion-spinner>
+        <h6>{{project.name}}</h6>
+        <p>{{project.totalSeconds | hoursMinutesSeconds}}</p>
+        <p>{{project.totalSeconds}}</p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button color="light" ion-button icon-only (click)="editProject(project)">
+          <ion-icon name="settings"></ion-icon>
+        </button>
+        <button color="danger" ion-button icon-only (click)="projectsService.removeProject(project)">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
