@@ -107,4 +107,9 @@ export class BooksProvider {
       this.save();
     }
   }
+
+  addReadPages(book, pagesRead: number): void {
+    book.addReadPages(pagesRead);
+    this.save();
+  }
 }

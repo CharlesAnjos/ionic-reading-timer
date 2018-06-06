@@ -27,9 +27,9 @@ export class HomePage {
       title: 'New Book',
       message: 'Enter data for your new book',
       inputs: [
-        { name: 'title' },
-        { name: 'author' },
-        { name: 'pagesNumber' },
+        { name: 'title', placeholder: 'Title' },
+        { name: 'author', placeholder: 'Author'  },
+        { name: 'pagesNumber', placeholder: 'Number of Pages' }
       ],
       buttons: [
         { text: 'Cancel'},
@@ -56,9 +56,9 @@ export class HomePage {
       title: 'Edit Book',
       message: 'Enter a new name for your new book',
       inputs: [
-        { name: 'title' },
-        { name: 'author' },
-        { name: 'pagesNumber'}
+        { name: 'title', placeholder: 'Title' },
+        { name: 'author', placeholder: 'Author'  },
+        { name: 'pagesNumber', placeholder: 'Number of Pages' }
       ],
       buttons: [
         { text: 'Cancel' },
@@ -90,7 +90,9 @@ export class HomePage {
       let modal = this.modalCtrl.create(StopTimingPage, {
         elapsedTime: elapsedTime
       });
-      modal.onDidDismiss((modifiedSeconds) => {
+      modal.onDidDismiss((data) => {
+        let modifiedSeconds: number = parseInt(data[0]);
+        let pagesRead: number = parseInt(data[1]);
         if(modifiedSeconds > elapsedTime) {
           let difference = modifiedSeconds - elapsedTime;
           this.booksService.increaseSeconds(book, difference);
@@ -98,6 +100,7 @@ export class HomePage {
           let difference = elapsedTime - modifiedSeconds;
           this.booksService.decreaseSeconds(book, difference);
         }
+        this.booksService.addReadPages(book, pagesRead);
       });
       modal.present();
     }

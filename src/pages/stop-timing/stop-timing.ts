@@ -12,6 +12,7 @@ export class StopTimingPage {
   hours: number;
   minutes: number;
   seconds: number;
+  pagesRead: number;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -26,12 +27,9 @@ export class StopTimingPage {
   }
 
   submitTime() {
-    console.log("this.hours"+this.hours);
-    console.log("this.minutes"+this.minutes);
-    console.log("this.seconds"+this.seconds);
     let modifiedSeconds = (this.hours * 60 * 60) + (this.minutes * 60) + (this.seconds * 1);
     console.log("modifiedSeconds"+modifiedSeconds);
-    this.viewCtrl.dismiss(modifiedSeconds);
+    this.viewCtrl.dismiss([modifiedSeconds, this.pagesRead]);
   }
 
 }

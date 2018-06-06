@@ -21,7 +21,7 @@ export class BookModel {
     this.pagesNumber = pagesNumber;
   }
 
-  addToPagesRead(pagesRead: number) {
+  addReadPages(pagesRead: number) {
     this.pagesRead += pagesRead;
   }
 
