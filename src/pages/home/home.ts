@@ -56,9 +56,9 @@ export class HomePage {
       title: 'Edit Book',
       message: 'Enter a new name for your new book',
       inputs: [
-        { name: 'title', placeholder: 'Title' },
-        { name: 'author', placeholder: 'Author'  },
-        { name: 'pagesNumber', placeholder: 'Number of Pages' }
+        { name: 'title', placeholder: 'Title', value: book.name },
+        { name: 'author', placeholder: 'Author', value: book.author  },
+        { name: 'pagesNumber', placeholder: 'Number of Pages', value: book.pagesNumber }
       ],
       buttons: [
         { text: 'Cancel' },
