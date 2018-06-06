@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, ModalController } from 'ionic-angular';
 import { StopTimingPage } from '../stop-timing/stop-timing';
-import { ProjectsProvider } from '../../providers/projects/projects';
-import { ProjectModel } from '../../models/project-model/project-model';
+import { BooksProvider } from '../../providers/books/books';
+import { BookModel } from '../../models/book-model/book-model';
 
 @Component({
   selector: 'page-home',
@@ -12,29 +12,38 @@ export class HomePage {
 
   constructor(public navCtrl: NavController,
     public alertCtrl: AlertController,
-    public projectsService: ProjectsProvider,
+    public booksService: BooksProvider,
     public modalCtrl: ModalController
   ) {
 
   }
 
   ionViewDidLoad(){
-    this.projectsService.load();
+    this.booksService.load();
   }
 
-  newProject(): void {
+  newBook(): void {
     let prompt = this.alertCtrl.create({
-      title: 'New Project',
-      message: 'Enter a name for your new project',
+      title: 'New Book',
+      message: 'Enter data for your new book',
       inputs: [
-        { name: 'title' }
+        { name: 'title' },
+        { name: 'author' },
+        { name: 'pagesNumber' },
       ],
       buttons: [
         { text: 'Cancel'},
         { text: 'Add', 
           handler: (data) => {
-            let project = new ProjectModel(data.title, new Date(), 0, false);
-            this.projectsService.addProject(project);
+            let book = new BookModel(
+              data.title, 
+              data.author, 
+              data.pagesNumber,
+              0,
+              new Date(), 
+              0, 
+              false);
+            this.booksService.addBook(book);
           }
         }
       ]
@@ -42,19 +51,21 @@ export class HomePage {
     prompt.present();
   }
 
-  editProject(project): void {
+  editBook(book): void {
     let prompt = this.alertCtrl.create({
-      title: 'Edit Project',
-      message: 'Enter a new name for your new project',
+      title: 'Edit Book',
+      message: 'Enter a new name for your new book',
       inputs: [
-        { name: 'title' }
+        { name: 'title' },
+        { name: 'author' },
+        { name: 'pagesNumber'}
       ],
       buttons: [
         { text: 'Cancel' },
         {
           text: 'Save',
           handler: (data) => {
-            this.projectsService.editProject(project, data.title);
+            this.booksService.editBook(book, data.title, data.author, data.pagesNumber);
           }
         }
       ]
@@ -62,30 +73,30 @@ export class HomePage {
     prompt.present();
   }
 
-  toggleTimer(project): void {
-    if(!project.active){
-      if(!this.projectsService.projectActive){
-        this.projectsService.startTiming(project, false);
+  toggleTimer(book): void {
+    if(!book.active){
+      if(!this.booksService.bookActive){
+        this.booksService.startTiming(book, false);
       } else {
         let alert = this.alertCtrl.create({
           title: 'Oops!',
-          subTitle: 'You are already timing a project. You must stop it before timing a new project.',
+          subTitle: 'You are already timing a book. You must stop it before timing a new book.',
           buttons: ['OK']
         });
         alert.present();
       }
     } else {
-      let elapsedTime = this.projectsService.stopTiming(project);
+      let elapsedTime = this.booksService.stopTiming(book);
       let modal = this.modalCtrl.create(StopTimingPage, {
         elapsedTime: elapsedTime
       });
       modal.onDidDismiss((modifiedSeconds) => {
         if(modifiedSeconds > elapsedTime) {
           let difference = modifiedSeconds - elapsedTime;
-          this.projectsService.increaseSeconds(project, difference);
+          this.booksService.increaseSeconds(book, difference);
         } else {
           let difference = elapsedTime - modifiedSeconds;
-          this.projectsService.decreaseSeconds(project, difference);
+          this.booksService.decreaseSeconds(book, difference);
         }
       });
       modal.present();

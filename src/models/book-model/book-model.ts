@@ -1,5 +1,8 @@
-export class ProjectModel {
+export class BookModel {
   constructor(public name: string,
+    public author: string,
+    public pagesNumber: number,
+    public pagesRead: number,
     public lastChecked: Date,
     public totalSeconds: number,
     public active: boolean) {
@@ -8,6 +11,18 @@ export class ProjectModel {
 
   setName(name: string): void {
     this.name = name;
+  }
+
+  setAuthor(author: string): void {
+    this.author = author;
+  }
+
+  setPagesNumber(pagesNumber: number) {
+    this.pagesNumber = pagesNumber;
+  }
+
+  addToPagesRead(pagesRead: number) {
+    this.pagesRead += pagesRead;
   }
 
   setLastChecked(lastChecked: Date): void {

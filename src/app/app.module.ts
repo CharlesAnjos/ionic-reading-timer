@@ -6,7 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ProjectsProvider } from '../providers/projects/projects';
+import { BooksProvider } from '../providers/books/books';
 import { StopTimingPage } from '../pages/stop-timing/stop-timing';
 import { HoursMinutesSecondsPipe } from '../pipes/hours-minutes-seconds/hours-minutes-seconds';
 
@@ -34,7 +34,7 @@ import { IonicStorageModule } from '@ionic/storage';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ProjectsProvider,
+    BooksProvider,
     Storage
   ]
 })
