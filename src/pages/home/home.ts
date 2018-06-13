@@ -92,7 +92,7 @@ export class HomePage {
       });
       modal.onDidDismiss((data) => {
         let modifiedSeconds: number = parseInt(data[0]);
-        let pagesRead: number = parseInt(data[1]);
+        let lastPage: number = parseInt(data[1]);
         if(modifiedSeconds > elapsedTime) {
           let difference = modifiedSeconds - elapsedTime;
           this.booksService.increaseSeconds(book, difference);
@@ -100,7 +100,7 @@ export class HomePage {
           let difference = elapsedTime - modifiedSeconds;
           this.booksService.decreaseSeconds(book, difference);
         }
-        this.booksService.addReadPages(book, pagesRead);
+        this.booksService.setLastPage(book, lastPage);
       });
       modal.present();
     }

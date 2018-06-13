@@ -24,7 +24,7 @@ export class BooksProvider {
             book.name,
             book.author, 
             book.pagesNumber,
-            book.pagesRead,
+            book.lastPage,
             new Date(book.lastChecked), 
             book.totalSeconds,
             book.active);
@@ -108,8 +108,8 @@ export class BooksProvider {
     }
   }
 
-  addReadPages(book, pagesRead: number): void {
-    book.addReadPages(pagesRead);
+  setLastPage(book, lastPage: number): void {
+    book.setLastPage(lastPage);
     this.save();
   }
 }

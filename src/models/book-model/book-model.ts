@@ -2,7 +2,7 @@ export class BookModel {
   constructor(public name: string,
     public author: string,
     public pagesNumber: number,
-    public pagesRead: number,
+    public lastPage: number,
     public lastChecked: Date,
     public totalSeconds: number,
     public active: boolean) {
@@ -21,8 +21,8 @@ export class BookModel {
     this.pagesNumber = pagesNumber;
   }
 
-  addReadPages(pagesRead: number) {
-    this.pagesRead += pagesRead;
+  setLastPage(lastPage: number) {
+    this.lastPage = lastPage;
   }
 
   setLastChecked(lastChecked: Date): void {

@@ -19,7 +19,7 @@
         <h6>{{book.name}}</h6>
         <h5>{{book.author}}</h5>
         <p>{{book.totalSeconds | hoursMinutesSeconds}}</p>
-        <p>{{book.pagesRead}}/{{book.pagesNumber}} pages read so far</p>
+        <p>{{book.lastPage}}/{{book.pagesNumber}} pages read so far</p>
       </ion-item>
       <ion-item-options side="right">
         <button color="light" ion-button icon-only (click)="editBook(book)">
